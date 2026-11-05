@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { Jeu } from "../src/jeu";
 import type { Classement } from "../src/classement";
 
@@ -68,5 +68,16 @@ describe("La victoire", () => {
     const jeu = nouveauJeu();
     marquer(jeu, "Bob", 4);
     expect(jeu.score()).toBe("Victoire Bob");
+  });
+});
+
+describe("Le classement du tournoi", () => {
+  // Spy car on vérifie après coup l'appel reçu par le classement
+  // Pas de stub car enregistrer ne renvoie rien et pas de mock car vi.fn suffit
+  it("à la fin du match le vainqueur est enregistré en premier", () => {
+    const classement = { enregistrer: vi.fn() };
+    const jeu = new Jeu("Alice", "Bob", classement);
+    marquer(jeu, "Bob", 4);
+    expect(classement.enregistrer).toHaveBeenCalledWith("Bob", "Alice");
   });
 });
