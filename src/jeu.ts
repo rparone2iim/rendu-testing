@@ -1,6 +1,7 @@
 import type { Classement } from "./classement";
 
 const ANNONCES = ["Zéro", "Quinze", "Trente", "Quarante"];
+const QUARANTE = 3;
 
 export class Jeu {
   private pointsJoueur1 = 0;
@@ -19,11 +20,11 @@ export class Jeu {
 
   score(): string {
     const annonce1 = ANNONCES[this.pointsJoueur1];
-    if (this.pointsJoueur1 === 3 && this.pointsJoueur2 === 3) return "Égalité";
-    // À égalité on annonce A sauf au début du jeu
-    if (this.pointsJoueur1 === this.pointsJoueur2 && this.pointsJoueur1 > 0) {
-      return `${annonce1}-A`;
-    }
+    const pointsEgaux = this.pointsJoueur1 === this.pointsJoueur2;
+
+    if (pointsEgaux && this.pointsJoueur1 === QUARANTE) return "Égalité";
+    // Points égaux en cours de jeu donc le second score s'annonce A
+    if (pointsEgaux && this.pointsJoueur1 > 0) return `${annonce1}-A`;
     return `${annonce1}-${ANNONCES[this.pointsJoueur2]}`;
   }
 }

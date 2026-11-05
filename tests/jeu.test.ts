@@ -9,6 +9,10 @@ function nouveauJeu() {
   return new Jeu("Alice", "Bob", classementInutile);
 }
 
+function marquer(jeu: Jeu, joueur: string, nombre: number) {
+  for (let i = 0; i < nombre; i++) jeu.pointPour(joueur);
+}
+
 describe("Les points", () => {
   it("un jeu commence à Zéro-Zéro", () => {
     expect(nouveauJeu().score()).toBe("Zéro-Zéro");
@@ -16,32 +20,28 @@ describe("Les points", () => {
 
   it("un premier point vaut Quinze", () => {
     const jeu = nouveauJeu();
-    jeu.pointPour("Alice");
+    marquer(jeu, "Alice", 1);
     expect(jeu.score()).toBe("Quinze-Zéro");
   });
 
   it("les points du joueur 2 s'affichent en second", () => {
     const jeu = nouveauJeu();
-    jeu.pointPour("Alice");
-    jeu.pointPour("Alice");
-    jeu.pointPour("Bob");
+    marquer(jeu, "Alice", 2);
+    marquer(jeu, "Bob", 1);
     expect(jeu.score()).toBe("Trente-Quinze");
   });
 
   it("trois points valent Quarante", () => {
     const jeu = nouveauJeu();
-    jeu.pointPour("Alice");
-    jeu.pointPour("Alice");
-    jeu.pointPour("Alice");
-    jeu.pointPour("Bob");
-    jeu.pointPour("Bob");
+    marquer(jeu, "Alice", 3);
+    marquer(jeu, "Bob", 2);
     expect(jeu.score()).toBe("Quarante-Trente");
   });
 
   it("à points égaux le score s'annonce A", () => {
     const jeu = nouveauJeu();
-    jeu.pointPour("Alice");
-    jeu.pointPour("Bob");
+    marquer(jeu, "Alice", 1);
+    marquer(jeu, "Bob", 1);
     expect(jeu.score()).toBe("Quinze-A");
   });
 });
@@ -49,12 +49,8 @@ describe("Les points", () => {
 describe("Le point décisif", () => {
   it("à quarante partout le score est Égalité", () => {
     const jeu = nouveauJeu();
-    jeu.pointPour("Alice");
-    jeu.pointPour("Alice");
-    jeu.pointPour("Alice");
-    jeu.pointPour("Bob");
-    jeu.pointPour("Bob");
-    jeu.pointPour("Bob");
+    marquer(jeu, "Alice", 3);
+    marquer(jeu, "Bob", 3);
     expect(jeu.score()).toBe("Égalité");
   });
 });
