@@ -10,11 +10,24 @@ function nouveauMatch() {
   return new Match("Alice", "Bob", classementInutile);
 }
 
+function marquer(match: Match, joueur: string, nombre: number) {
+  for (let i = 0; i < nombre; i++) match.pointPour(joueur);
+}
+
 describe("Le match en un set", () => {
   it("un match commence sans jeu gagné et à Zéro-Zéro", () => {
     const match = nouveauMatch();
     expect(match.jeuxGagnes("Alice")).toBe(0);
     expect(match.jeuxGagnes("Bob")).toBe(0);
     expect(match.score()).toBe("Zéro-Zéro");
+  });
+
+  it("un jeu gagné compte pour son vainqueur et le suivant repart à zéro", () => {
+    const match = nouveauMatch();
+    marquer(match, "Bob", 4);
+    marquer(match, "Alice", 1);
+    expect(match.jeuxGagnes("Bob")).toBe(1);
+    expect(match.jeuxGagnes("Alice")).toBe(0);
+    expect(match.score()).toBe("Quinze-Zéro");
   });
 });
