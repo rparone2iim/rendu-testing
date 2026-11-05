@@ -1,6 +1,8 @@
 import type { Classement } from "./classement";
 import { Jeu } from "./jeu";
 
+const JEUX_POUR_GAGNER = 4;
+
 export class Match {
   private jeuxJoueur1 = 0;
   private jeuxJoueur2 = 0;
@@ -23,7 +25,22 @@ export class Match {
   }
 
   score(): string {
+    const vainqueur = this.vainqueur();
+    if (vainqueur) {
+      const perdant = this.adversaire(vainqueur);
+      return `Victoire ${vainqueur} ${this.jeuxGagnes(vainqueur)}-${this.jeuxGagnes(perdant)}`;
+    }
     return this.jeuEnCours.score();
+  }
+
+  private vainqueur(): string | undefined {
+    if (this.jeuxJoueur1 === JEUX_POUR_GAGNER) return this.joueur1;
+    if (this.jeuxJoueur2 === JEUX_POUR_GAGNER) return this.joueur2;
+    return undefined;
+  }
+
+  private adversaire(joueur: string): string {
+    return joueur === this.joueur1 ? this.joueur2 : this.joueur1;
   }
 
   private nouveauJeu(): Jeu {
