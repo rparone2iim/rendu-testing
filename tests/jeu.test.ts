@@ -1,0 +1,16 @@
+import { describe, it, expect } from "vitest";
+import { Jeu } from "../src/jeu";
+import type { Classement } from "../src/classement";
+
+// Dummy car le constructeur exige un classement mais ces tests ne vérifient que le score
+const classementInutile: Classement = { enregistrer: () => {} };
+
+function nouveauJeu() {
+  return new Jeu("Alice", "Bob", classementInutile);
+}
+
+describe("Les points", () => {
+  it("un jeu commence à Zéro-Zéro", () => {
+    expect(nouveauJeu().score()).toBe("Zéro-Zéro");
+  });
+});
