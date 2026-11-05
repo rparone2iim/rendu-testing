@@ -20,6 +20,7 @@ export class Jeu {
 
   score(): string {
     if (this.pointsJoueur1 > QUARANTE) return `Victoire ${this.joueur1}`;
+    if (this.pointsJoueur2 > QUARANTE) return `Victoire ${this.joueur2}`;
 
     const annonce1 = ANNONCES[this.pointsJoueur1];
     const pointsEgaux = this.pointsJoueur1 === this.pointsJoueur2;
