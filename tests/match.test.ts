@@ -14,6 +14,10 @@ function marquer(match: Match, joueur: string, nombre: number) {
   for (let i = 0; i < nombre; i++) match.pointPour(joueur);
 }
 
+function gagnerJeux(match: Match, joueur: string, nombre: number) {
+  marquer(match, joueur, nombre * 4);
+}
+
 describe("Le match en un set", () => {
   it("un match commence sans jeu gagné et à Zéro-Zéro", () => {
     const match = nouveauMatch();
@@ -29,5 +33,12 @@ describe("Le match en un set", () => {
     expect(match.jeuxGagnes("Bob")).toBe(1);
     expect(match.jeuxGagnes("Alice")).toBe(0);
     expect(match.score()).toBe("Quinze-Zéro");
+  });
+
+  it("le premier à quatre jeux gagne le match sans écart de deux jeux", () => {
+    const match = nouveauMatch();
+    gagnerJeux(match, "Alice", 3);
+    gagnerJeux(match, "Bob", 4);
+    expect(match.score()).toBe("Victoire Bob 4-3");
   });
 });
