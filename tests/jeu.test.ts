@@ -37,4 +37,11 @@ describe("Les points", () => {
     jeu.pointPour("Bob");
     expect(jeu.score()).toBe("Quarante-Trente");
   });
+
+  it("à points égaux le score s'annonce A", () => {
+    const jeu = nouveauJeu();
+    jeu.pointPour("Alice");
+    jeu.pointPour("Bob");
+    expect(jeu.score()).toBe("Quinze-A");
+  });
 });
