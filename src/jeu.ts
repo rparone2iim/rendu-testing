@@ -19,6 +19,7 @@ export class Jeu {
 
   score(): string {
     const annonce1 = ANNONCES[this.pointsJoueur1];
+    if (this.pointsJoueur1 === 3 && this.pointsJoueur2 === 3) return "Égalité";
     // À égalité on annonce A sauf au début du jeu
     if (this.pointsJoueur1 === this.pointsJoueur2 && this.pointsJoueur1 > 0) {
       return `${annonce1}-A`;
