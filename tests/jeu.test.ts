@@ -62,3 +62,11 @@ describe("Le point décisif", () => {
     expect(jeu.score()).toBe("Victoire Alice");
   });
 });
+
+describe("La victoire", () => {
+  it("le joueur à Quarante qui marque gagne le match", () => {
+    const jeu = nouveauJeu();
+    marquer(jeu, "Bob", 4);
+    expect(jeu.score()).toBe("Victoire Bob");
+  });
+});
