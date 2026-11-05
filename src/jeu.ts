@@ -1,9 +1,10 @@
 import type { Classement } from "./classement";
 
-const ANNONCES = ["Zéro", "Quinze"];
+const ANNONCES = ["Zéro", "Quinze", "Trente"];
 
 export class Jeu {
   private pointsJoueur1 = 0;
+  private pointsJoueur2 = 0;
 
   constructor(
     private joueur1: string,
@@ -12,10 +13,11 @@ export class Jeu {
   ) {}
 
   pointPour(joueur: string): void {
-    this.pointsJoueur1++;
+    if (joueur === this.joueur1) this.pointsJoueur1++;
+    else this.pointsJoueur2++;
   }
 
   score(): string {
-    return `${ANNONCES[this.pointsJoueur1]}-Zéro`;
+    return `${ANNONCES[this.pointsJoueur1]}-${ANNONCES[this.pointsJoueur2]}`;
   }
 }
