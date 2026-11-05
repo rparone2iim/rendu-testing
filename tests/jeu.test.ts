@@ -3,6 +3,7 @@ import { Jeu } from "../src/jeu";
 import type { Classement } from "../src/classement";
 
 // Dummy car le constructeur exige un classement mais ces tests ne vérifient que le score
+// Y'a pas de spy ni de mock ici aussi car aucun appel au classement n'est vérifié
 const classementInutile: Classement = { enregistrer: () => {} };
 
 function nouveauJeu() {
