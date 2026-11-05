@@ -19,4 +19,12 @@ describe("Les points", () => {
     jeu.pointPour("Alice");
     expect(jeu.score()).toBe("Quinze-Zéro");
   });
+
+  it("les points du joueur 2 s'affichent en second", () => {
+    const jeu = nouveauJeu();
+    jeu.pointPour("Alice");
+    jeu.pointPour("Alice");
+    jeu.pointPour("Bob");
+    expect(jeu.score()).toBe("Trente-Quinze");
+  });
 });
