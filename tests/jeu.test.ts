@@ -13,4 +13,10 @@ describe("Les points", () => {
   it("un jeu commence à Zéro-Zéro", () => {
     expect(nouveauJeu().score()).toBe("Zéro-Zéro");
   });
+
+  it("un premier point vaut Quinze", () => {
+    const jeu = nouveauJeu();
+    jeu.pointPour("Alice");
+    expect(jeu.score()).toBe("Quinze-Zéro");
+  });
 });
