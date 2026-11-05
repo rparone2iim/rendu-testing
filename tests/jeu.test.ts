@@ -53,4 +53,12 @@ describe("Le point décisif", () => {
     marquer(jeu, "Bob", 3);
     expect(jeu.score()).toBe("Égalité");
   });
+
+  it("à égalité le point suivant gagne le match", () => {
+    const jeu = nouveauJeu();
+    marquer(jeu, "Alice", 3);
+    marquer(jeu, "Bob", 3);
+    marquer(jeu, "Alice", 1);
+    expect(jeu.score()).toBe("Victoire Alice");
+  });
 });
