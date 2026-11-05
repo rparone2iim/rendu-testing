@@ -17,6 +17,8 @@ export class Match {
   }
 
   pointPour(joueur: string): void {
+    // Après la victoire les points ne comptent plus
+    if (this.vainqueur()) return;
     this.jeuEnCours.pointPour(joueur);
   }
 
@@ -54,5 +56,8 @@ export class Match {
     if (vainqueur === this.joueur1) this.jeuxJoueur1++;
     else this.jeuxJoueur2++;
     this.jeuEnCours = this.nouveauJeu();
+
+    const vainqueurMatch = this.vainqueur();
+    if (vainqueurMatch) this.classement.enregistrer(vainqueurMatch, this.adversaire(vainqueurMatch));
   }
 }
