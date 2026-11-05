@@ -80,4 +80,13 @@ describe("Le classement du tournoi", () => {
     marquer(jeu, "Bob", 4);
     expect(classement.enregistrer).toHaveBeenCalledWith("Bob", "Alice");
   });
+
+  // Spy car on compte les appels reçus par le classement
+  // Un mock vérifierait la même chose en plus lourd
+  it("le résultat est enregistré une seule fois", () => {
+    const classement = { enregistrer: vi.fn() };
+    const jeu = new Jeu("Alice", "Bob", classement);
+    marquer(jeu, "Bob", 5);
+    expect(classement.enregistrer).toHaveBeenCalledTimes(1);
+  });
 });
