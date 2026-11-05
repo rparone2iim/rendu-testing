@@ -18,6 +18,11 @@ export class Jeu {
   }
 
   score(): string {
-    return `${ANNONCES[this.pointsJoueur1]}-${ANNONCES[this.pointsJoueur2]}`;
+    const annonce1 = ANNONCES[this.pointsJoueur1];
+    // À égalité on annonce A sauf au début du jeu
+    if (this.pointsJoueur1 === this.pointsJoueur2 && this.pointsJoueur1 > 0) {
+      return `${annonce1}-A`;
+    }
+    return `${annonce1}-${ANNONCES[this.pointsJoueur2]}`;
   }
 }
