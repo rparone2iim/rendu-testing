@@ -27,4 +27,14 @@ describe("Les points", () => {
     jeu.pointPour("Bob");
     expect(jeu.score()).toBe("Trente-Quinze");
   });
+
+  it("trois points valent Quarante", () => {
+    const jeu = nouveauJeu();
+    jeu.pointPour("Alice");
+    jeu.pointPour("Alice");
+    jeu.pointPour("Alice");
+    jeu.pointPour("Bob");
+    jeu.pointPour("Bob");
+    expect(jeu.score()).toBe("Quarante-Trente");
+  });
 });
