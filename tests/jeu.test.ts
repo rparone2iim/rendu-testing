@@ -45,3 +45,16 @@ describe("Les points", () => {
     expect(jeu.score()).toBe("Quinze-A");
   });
 });
+
+describe("Le point décisif", () => {
+  it("à quarante partout le score est Égalité", () => {
+    const jeu = nouveauJeu();
+    jeu.pointPour("Alice");
+    jeu.pointPour("Alice");
+    jeu.pointPour("Alice");
+    jeu.pointPour("Bob");
+    jeu.pointPour("Bob");
+    jeu.pointPour("Bob");
+    expect(jeu.score()).toBe("Égalité");
+  });
+});
