@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { Match } from "../src/match";
 import type { Classement } from "../src/classement";
 
@@ -40,5 +40,19 @@ describe("Le match en un set", () => {
     gagnerJeux(match, "Alice", 3);
     gagnerJeux(match, "Bob", 4);
     expect(match.score()).toBe("Victoire Bob 4-3");
+  });
+});
+
+describe("Le classement du match", () => {
+  // Spy car on vérifie après coup les appels reçus par le classement
+  // Pas de mock car vi.fn suffit et pas de fake car on ne stocke aucun résultat
+  it("le classement enregistre le match une seule fois et pas chaque jeu", () => {
+    const classement = { enregistrer: vi.fn() };
+    const match = new Match("Alice", "Bob", classement);
+    gagnerJeux(match, "Alice", 2);
+    gagnerJeux(match, "Bob", 4);
+    gagnerJeux(match, "Bob", 1);
+    expect(classement.enregistrer).toHaveBeenCalledTimes(1);
+    expect(classement.enregistrer).toHaveBeenCalledWith("Bob", "Alice");
   });
 });
